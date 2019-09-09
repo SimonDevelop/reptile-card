@@ -1,1 +1,22 @@
-<p>reptile-list works!</p>
+<div class="row">
+
+  <div class="col-xs-12">
+    <h2>Mes reptiles</h2>
+
+    <div class="list-group">
+      <button
+        class="list-group-item"
+        *ngFor="let reptile of reptiles; let i = index"
+        (click)="onViewReptile(i)">
+        <h3 class="list-group-item-heading">
+          {{ reptile.name }}
+          <button class="btn btn-danger pull-right" (click)="onDeleteReptile(reptile)">
+            Supprimer
+          </button>
+        </h3>
+      </button>
+    </div>
+
+    <button class="btn btn-primary" (click)="onNewReptile()">Nouveau reptile</button>
+  </div>
+</div>
