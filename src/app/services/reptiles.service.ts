@@ -49,6 +49,18 @@ export class ReptilesService {
   }
 
   removeReptile(reptile: Reptile) {
+    if (reptile.photo) {
+      const storageRef = firebase.storage().refFromURL(reptile.photo);
+      storageRef.delete().then(
+        () => {
+          console.log("photo supprimé !");
+        }
+      ).catch(
+        (error) => {
+          console.log("photo non trouvé !")
+        }
+      );
+    }
     const reptileIndexToRemove = this.reptiles.findIndex(
       (reptileEl) => {
         if(reptileEl === reptile) {
@@ -59,6 +71,29 @@ export class ReptilesService {
     this.reptiles.splice(reptileIndexToRemove, 1);
     this.saveReptiles();
     this.emitReptiles();
+  }
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child("images/" + almostUniqueFileName + file.name)
+          .put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log("Chargement en cours...");
+          },
+          (error) => {
+            console.log("Erreur de chargement : " + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL())
+          }
+        )
+      }
+    )
   }
 
   constructor() {

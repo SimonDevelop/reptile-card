@@ -2,30 +2,34 @@
   <div class="col-sm-8 col-sm-offset-2">
     <h2>Enregistrer un nouveau reptile</h2>
     <form [formGroup]="reptileForm" (ngSubmit)="onSaveReptile()">
+
       <div class="form-group">
         <label for="name">Nom</label>
-        <input type="text" id="name"
-               class="form-control" formControlName="name">
+        <input type="text" id="name" class="form-control" formControlName="name">
       </div>
+
       <div class="form-group">
         <label for="birthday">Date de naissance</label>
-        <div class="input-group">
-          <input id="birthday" class="form-control" placeholder="dd/mm/yyyy"
-                 name="birthday" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-              <i class="far fa-calendar-alt"></i>
-            </button>
-          </div>
-        </div>
+        <input id="birthday" class="form-control" placeholder="dd/mm/yyyy" formControlName="birthday">
       </div>
+
       <div class="form-group">
         <label for="note">Note</label>
-        <textarea id="note"
-                  class="form-control" formControlName="note">
+        <textarea id="note" class="form-control" formControlName="note">
         </textarea>
       </div>
-      <button class="btn btn-success" [disabled]="reptileForm.invalid"
+
+      <div class="input-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="photo" (change)="detectFiles($event)"
+            accept="image/*">
+          <label class="custom-file-label" for="photo">Choisissez une photo</label>
+        </div>
+      </div>
+      <p *ngIf="fileUploaded">Photo envoyé avec succès</p>
+      <p *ngIf="fileIsUploading">Photo en cours d'envoie</p>
+      <br>
+      <button class="btn btn-success" [disabled]="reptileForm.invalid || fileIsUploading"
               type="submit">Enregistrer
       </button>
 
