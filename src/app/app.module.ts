@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 
 import { ReptileListComponent } from './reptile-list/reptile-list.component';
@@ -19,15 +18,16 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'reptiles', component: ReptileListComponent },
-  { path: 'reptiles/new', component: ReptileFormComponent },
-  { path: 'reptiles/view/:id', component: ShowReptileComponent }
+  { path: 'reptiles', canActivate: [AuthGuardService], component: ReptileListComponent },
+  { path: 'reptiles/new', canActivate: [AuthGuardService], component: ReptileFormComponent },
+  { path: 'reptiles/view/:id', canActivate: [AuthGuardService], component: ShowReptileComponent },
+  { path: '', redirectTo: 'reptiles', pathMatch: 'full' },
+  { path: '**', redirectTo: 'reptiles' }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
     SigninComponent,
     ReptileListComponent,
     ShowReptileComponent,
