@@ -1,1 +1,27 @@
-<p>reptile-form works!</p>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2>Enregistrer un nouveau reptile</h2>
+    <form [formGroup]="reptileForm" (ngSubmit)="onSaveReptile()">
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name"
+               class="form-control" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="birthday">Date de naissance</label>
+        <input type="text" id="birthday"
+               class="form-control" formControlName="birthday">
+      </div>
+      <div class="form-group">
+        <label for="note">Note</label>
+        <textarea id="note"
+                  class="form-control" formControlName="note">
+        </textarea>
+      </div>
+      <button class="btn btn-success" [disabled]="reptileForm.invalid"
+              type="submit">Enregistrer
+      </button>
+
+    </form>
+  </div>
+</div>
