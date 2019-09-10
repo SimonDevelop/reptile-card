@@ -26,8 +26,12 @@
           <label class="custom-file-label" for="photo">Choisissez une photo</label>
         </div>
       </div>
-      <p *ngIf="fileUploaded">Photo envoyé avec succès</p>
-      <p *ngIf="fileIsUploading">Photo en cours d'envoie</p>
+      <p *ngIf="fileUploaded">
+        <i class="fas fa-check"></i> Photo envoyé avec succès
+      </p>
+      <p *ngIf="fileIsUploading">
+        <i class="fas fa-spinner fa-pulse" ></i> Photo en cours d'envoie
+      </p>
       <br>
       <button class="btn btn-success" [disabled]="reptileForm.invalid || fileIsUploading"
               type="submit">Enregistrer
