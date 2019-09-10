@@ -6,7 +6,7 @@
     <div class="row justify-content-md-center">
 
       <div class="col-md-4" *ngFor="let reptile of reptiles; let i = index">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 100%;">
           <img class="card-img-top" *ngIf="reptile.photo" [src]="reptile.photo">
           <div class="card-body">
             <h5 class="card-title">{{ reptile.name }}</h5>
