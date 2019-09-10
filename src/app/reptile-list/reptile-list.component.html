@@ -1,22 +1,54 @@
 <div class="row">
 
-  <div class="col-xs-12">
-    <h2>Mes reptiles</h2>
+  <div class="col-md-12">
+    <h1 class="text-center">Reptiles</h1>
+    <p class="text-center" *ngIf="reptiles.length < 1">Aucun reptile en base</p>
+    <div class="row justify-content-md-center">
 
-    <div class="list-group">
-      <button
-        class="list-group-item"
-        *ngFor="let reptile of reptiles; let i = index"
-        (click)="onViewReptile(i)">
-        <h3 class="list-group-item-heading">
-          {{ reptile.name }}
-          <button class="btn btn-danger pull-right" (click)="onDeleteReptile(reptile)">
-            Supprimer
-          </button>
-        </h3>
-      </button>
+      <div class="col-md-4" *ngFor="let reptile of reptiles; let i = index">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" *ngIf="reptile.photo" [src]="reptile.photo">
+          <div class="card-body">
+            <h5 class="card-title">{{ reptile.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ reptile.species }} ({{ reptile.gender }})
+            </h6>
+            <p class="card-text">{{ reptile.note }}</p>
+            <p class="card-text">
+              <small class="text-muted">
+                Né(e) le {{ reptile.birthday }}
+              </small>
+            </p>
+              <button  type="button" class="btn btn-primary" (click)="onViewReptile(i)" style="margin-right: 5px;">
+                Voir fiche
+              </button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#reptile'+i">
+                Supprimer
+              </button>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
+</div>
 
-    <button class="btn btn-primary" (click)="onNewReptile()">Nouveau reptile</button>
+<div class="modal fade" [attr.id]="'reptile'+i" tabindex="-1" role="dialog" [attr.aria-labelledby]="'reptileLabel'+i"
+  aria-hidden="true" *ngFor="let reptile of reptiles; let i = index">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" [attr.id]="'reptileLabel'+i">Suppression d'une fiche</h5>
+      </div>
+      <div class="modal-body">
+        Êtes vous sûr de vouloir supprimer la fiche "{{ reptile.name }}" ?
+        <br>
+        Toutes les données seront perdu.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button class="btn btn-danger" (click)="onDeleteReptile(reptile)" data-dismiss="modal">Supprimer</button>
+      </div>
+    </div>
   </div>
 </div>

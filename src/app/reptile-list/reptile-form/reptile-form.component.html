@@ -4,17 +4,33 @@
     <form [formGroup]="reptileForm" (ngSubmit)="onSaveReptile()">
 
       <div class="form-group">
-        <label for="name">Nom</label>
+        <label for="name">Nom :</label>
         <input type="text" id="name" class="form-control" formControlName="name">
       </div>
 
       <div class="form-group">
-        <label for="birthday">Date de naissance</label>
+        <label for="species">Espèce :</label>
+        <input type="text" id="species" class="form-control" formControlName="species">
+      </div>
+
+      <label>Sex :</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="male" formControlName="gender" class="custom-control-input" value="mâle">
+        <label class="custom-control-label" for="male">Mâle</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="femelle" formControlName="gender" class="custom-control-input" value="femelle">
+        <label class="custom-control-label" for="femelle">Femelle</label>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="birthday">Date de naissance :</label>
         <input id="birthday" class="form-control" placeholder="dd/mm/yyyy" formControlName="birthday">
       </div>
 
       <div class="form-group">
-        <label for="note">Note</label>
+        <label for="note">Note :</label>
         <textarea id="note" class="form-control" formControlName="note">
         </textarea>
       </div>
@@ -26,8 +42,12 @@
           <label class="custom-file-label" for="photo">Choisissez une photo</label>
         </div>
       </div>
-      <p *ngIf="fileUploaded">Photo envoyé avec succès</p>
-      <p *ngIf="fileIsUploading">Photo en cours d'envoie</p>
+      <p *ngIf="fileUploaded">
+        <i class="fas fa-check"></i> Photo envoyé avec succès
+      </p>
+      <p *ngIf="fileIsUploading">
+        <i class="fas fa-spinner fa-pulse" ></i> Photo en cours d'envoie
+      </p>
       <br>
       <button class="btn btn-success" [disabled]="reptileForm.invalid || fileIsUploading"
               type="submit">Enregistrer

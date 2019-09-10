@@ -28,6 +28,8 @@ export class ReptileFormComponent implements OnInit {
     this.reptileForm = this.formBuilder.group({
       name: ['', Validators.required],
       birthday: ['', Validators.required],
+      species: ['', Validators.required],
+      gender: ['', Validators.required],
       note: ''
     });
   }
@@ -35,8 +37,10 @@ export class ReptileFormComponent implements OnInit {
   onSaveReptile() {
     const name = this.reptileForm.get('name').value;
     const birthday = this.reptileForm.get('birthday').value;
+    const species = this.reptileForm.get('species').value;
+    const gender = this.reptileForm.get('gender').value;
     const note = this.reptileForm.get('note').value;
-    const newReptile = new Reptile(name, birthday);
+    const newReptile = new Reptile(name, birthday, species, gender);
     if (this.fileUrl && this.fileUrl !== "") {
       newReptile.photo = this.fileUrl;
     }
