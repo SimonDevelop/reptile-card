@@ -18,12 +18,12 @@
                 Né(e) le {{ reptile.birthday }}
               </small>
             </p>
-              <button  type="button" class="btn btn-primary" (click)="onViewReptile(i)" style="margin-right: 5px;">
-                Voir fiche
-              </button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#reptile'+i">
-                Supprimer
-              </button>
+            <button  type="button" class="btn btn-primary" (click)="onViewReptile(i)" style="margin-right: 5px;">
+              Voir fiche
+            </button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#reptile'+i">
+              Supprimer
+            </button>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
       <div class="modal-body">
         Êtes vous sûr de vouloir supprimer la fiche "{{ reptile.name }}" ?
         <br>
-        Toutes les données seront perdu.
+        Toutes les données seront perdues.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>

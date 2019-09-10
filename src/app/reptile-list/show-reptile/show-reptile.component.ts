@@ -29,4 +29,8 @@ export class ShowReptileComponent implements OnInit {
     this.router.navigate(['/reptiles']);
   }
 
+  onEditReptile() {
+    this.router.navigate(['/reptiles', 'edit', this.route.snapshot.params['id']]);
+  }
+
 }

@@ -48,6 +48,12 @@ export class ReptilesService {
     this.emitReptiles();
   }
 
+  editReptile(id: number, newReptile: Reptile) {
+    this.reptiles[id] = newReptile;
+    this.saveReptiles();
+    this.emitReptiles();
+  }
+
   removeReptile(reptile: Reptile) {
     if (reptile.photo) {
       const storageRef = firebase.storage().refFromURL(reptile.photo);
