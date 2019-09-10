@@ -2,6 +2,7 @@
 
   <div class="col-md-12">
     <h1 class="text-center">Reptiles</h1>
+    <p class="text-center" *ngIf="reptiles.length < 1">Aucun reptile en base</p>
     <div class="row justify-content-md-center">
 
       <div class="col-md-4" *ngFor="let reptile of reptiles; let i = index">
@@ -9,10 +10,13 @@
           <img class="card-img-top" *ngIf="reptile.photo" [src]="reptile.photo">
           <div class="card-body">
             <h5 class="card-title">{{ reptile.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ reptile.species }} ({{ reptile.gender }})
+            </h6>
             <p class="card-text">{{ reptile.note }}</p>
             <p class="card-text">
               <small class="text-muted">
-                Né le {{ reptile.birthday }}
+                Né(e) le {{ reptile.birthday }}
               </small>
             </p>
               <button  type="button" class="btn btn-primary" (click)="onViewReptile(i)" style="margin-right: 5px;">
