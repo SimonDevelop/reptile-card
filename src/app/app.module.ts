@@ -6,12 +6,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { HeaderComponent } from './header/header.component';
 
 import { ReptileListComponent } from './reptile-list/reptile-list.component';
 import { ShowReptileComponent } from './reptile-list/show-reptile/show-reptile.component';
 import { ReptileFormComponent } from './reptile-list/reptile-form/reptile-form.component';
 import { ReptileEditComponent } from './reptile-list/reptile-edit/reptile-edit.component';
-import { HeaderComponent } from './header/header.component';
+import { ReptileEndComponent } from './reptile-list/reptile-end/reptile-end.component';
 
 import { ReptilesService } from './services/reptiles.service';
 import { AuthService } from './services/auth.service';
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'reptiles', canActivate: [AuthGuardService], component: ReptileListComponent },
   { path: 'reptiles/new', canActivate: [AuthGuardService], component: ReptileFormComponent },
   { path: 'reptiles/edit/:id', canActivate: [AuthGuardService], component: ReptileEditComponent },
+  { path: 'reptiles/end/:id', canActivate: [AuthGuardService], component: ReptileEndComponent },
   { path: 'reptiles/view/:id', canActivate: [AuthGuardService], component: ShowReptileComponent },
   { path: '', redirectTo: 'reptiles', pathMatch: 'full' },
   { path: '**', redirectTo: 'reptiles' }
@@ -31,12 +33,12 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SigninComponent,
+    HeaderComponent,
     ReptileListComponent,
     ShowReptileComponent,
     ReptileFormComponent,
     ReptileEditComponent,
-    HeaderComponent,
-    ReptileEditComponent
+    ReptileEndComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center" *ngIf="reptile.name">
   <div class="col-md-8">
     <div class="card" style="margin-top: 15px;">
       <div class="card-header text-center" style="font-size: 24px;">
@@ -21,6 +21,7 @@
           <strong>Observation :</strong><br>
           {{ reptile.note }}
         </p>
+        <h4 *ngIf="reptile.destination || reptile.date_end || reptile.supporting_end">Sortie :</h4>
         <p class="card-text">
           <span *ngIf="reptile.destination">
             <strong>Destination :</strong> {{ reptile.destination }}
@@ -41,8 +42,13 @@
         </p>
       </div>
     </div>
-    <button  type="button" class="btn btn-warning" (click)="onEditReptile()" style="margin: 15px auto 0 auto;display: block;">
+    <button  type="button" class="btn btn-warning" (click)="onEditReptile()" style="margin: 15px auto 0 auto;display: block;"
+    *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
       Modifier les informations
+    </button>
+    <button  type="button" class="btn btn-danger" (click)="onEndReptile()" style="margin: 15px auto 0 auto;display: block;"
+    *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
+      Déclarer sa sortie
     </button>
     <button class="btn btn-primary" (click)="onBack()" style="margin: 15px auto 0 auto;display: block;">
       Retour à la liste
