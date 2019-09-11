@@ -10,12 +10,15 @@
           <img class="card-img-top" *ngIf="reptile.photo" [src]="reptile.photo">
           <div class="card-body">
             <h5 class="card-title">{{ reptile.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">
-              {{ reptile.species }} ({{ reptile.gender }})
+            <h6 class="card-subtitle mb-2">
+              {{ reptile.vernacular }} ({{ reptile.species }})
             </h6>
             <p class="card-text">
-              <small class="text-muted">
-                Né(e) le {{ reptile.birthday }}
+              <small class="text-muted" *ngIf="reptile.gender == 'mâle'">
+                ({{ reptile.gender }}) Né le {{ reptile.birthday }}
+              </small>
+              <small class="text-muted" *ngIf="reptile.gender == 'femelle'">
+                ({{ reptile.gender }}) Née le {{ reptile.birthday }}
               </small>
             </p>
             <button  type="button" class="btn btn-primary" (click)="onViewReptile(i)" style="margin-right: 5px;">

@@ -16,7 +16,7 @@ export class ShowReptileComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
-    this.reptile = new Reptile('', '', '', '');
+    this.reptile = new Reptile('', '', '', '', '', '', '', '');
     const id = this.route.snapshot.params['id'];
     this.reptilesService.getShowReptile(+id).then(
       (reptile: Reptile) => {
@@ -31,6 +31,10 @@ export class ShowReptileComponent implements OnInit {
 
   onEditReptile() {
     this.router.navigate(['/reptiles', 'edit', this.route.snapshot.params['id']]);
+  }
+
+  onEndReptile() {
+    this.router.navigate(['/reptiles', 'end', this.route.snapshot.params['id']]);
   }
 
 }

@@ -1,20 +1,54 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="card text-center" style="margin-top: 15px;">
-      <div class="card-header" style="font-size: 24px;">
+<div class="row justify-content-md-center" *ngIf="reptile.name">
+  <div class="col-md-8">
+    <div class="card" style="margin-top: 15px;">
+      <div class="card-header text-center" style="font-size: 24px;">
         <strong>{{ reptile.name }}</strong>
       </div>
       <div class="card-body">
-        <img style="max-width: 500px;width: 100%;" *ngIf="reptile.photo" [src]="reptile.photo">
-        <h5 class="card-title">{{ reptile.species }} ({{ reptile.gender }})</h5>
-        <p class="card-text">{{ reptile.note }}</p>
-      </div>
-      <div class="card-footer text-muted">
-        Né(e) le {{ reptile.birthday }}
+        <img style="width: 100%;display: block;margin:0 auto;" *ngIf="reptile.photo" [src]="reptile.photo">
+        <h5 class="card-title text-center">{{ reptile.vernacular }} ({{ reptile.species }})</h5>
+        <p class="card-text">
+          <strong>Sexe :</strong> {{ reptile.gender }}
+          <br>
+          <strong>Date de naissance :</strong> {{ reptile.birthday }}
+          <br>
+          <strong>Provenance :</strong> {{ reptile.origin }}
+          <br>
+          <strong>Date d'entrée :</strong> {{ reptile.date_start }}
+          <br>
+          <strong>Justificatif d'entrée :</strong> {{ reptile.supporting_start }}
+          <br>
+          <strong>Observation :</strong><br>
+          {{ reptile.note }}
+        </p>
+        <h4 *ngIf="reptile.destination || reptile.date_end || reptile.supporting_end">Sortie :</h4>
+        <p class="card-text">
+          <span *ngIf="reptile.destination">
+            <strong>Destination :</strong> {{ reptile.destination }}
+            <br>
+          </span>
+          <span *ngIf="reptile.date_end">
+            <strong>Date de sortie :</strong> {{ reptile.date_end }}
+            <br>
+          </span>
+          <span *ngIf="reptile.death">
+            <strong>Cause de la mort :</strong> {{ reptile.death }}
+            <br>
+          </span>
+          <span *ngIf="reptile.supporting_end">
+            <strong>Justificatif de sortie :</strong> {{ reptile.supporting_end }}
+            <br>
+          </span>
+        </p>
       </div>
     </div>
-    <button  type="button" class="btn btn-warning" (click)="onEditReptile()" style="margin: 15px auto 0 auto;display: block;">
+    <button  type="button" class="btn btn-warning" (click)="onEditReptile()" style="margin: 15px auto 0 auto;display: block;"
+    *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
       Modifier les informations
+    </button>
+    <button  type="button" class="btn btn-danger" (click)="onEndReptile()" style="margin: 15px auto 0 auto;display: block;"
+    *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
+      Déclarer sa sortie
     </button>
     <button class="btn btn-primary" (click)="onBack()" style="margin: 15px auto 0 auto;display: block;">
       Retour à la liste
