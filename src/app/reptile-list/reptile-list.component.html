@@ -15,10 +15,10 @@
             </h6>
             <p class="card-text">
               <small class="text-muted" *ngIf="reptile.gender == 'mâle'">
-                ({{ reptile.gender }}) Né le {{ reptile.birthday }}
+                ({{ reptile.gender }}) Né le {{ reptile.birthday | date : "dd/MM/yyyy" }}
               </small>
               <small class="text-muted" *ngIf="reptile.gender == 'femelle'">
-                ({{ reptile.gender }}) Née le {{ reptile.birthday }}
+                ({{ reptile.gender }}) Née le {{ reptile.birthday | date : "dd/MM/yyyy" }}
               </small>
             </p>
             <button  type="button" class="btn btn-primary" (click)="onViewReptile(i)" style="margin-right: 5px;">

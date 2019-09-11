@@ -1,0 +1,38 @@
+<div class="row" *ngIf="suiviForm">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2 *ngIf="reptile">Ajout d'un suivi pour la fiche "{{ reptile.name }}"</h2>
+    <form [formGroup]="suiviForm" (ngSubmit)="onSaveSuivi()">
+
+      <label>Action :</label>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="repas" formControlName="action" class="custom-control-input" value="repas">
+        <label class="custom-control-label" for="repas">Repas</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="mue" formControlName="action" class="custom-control-input" value="mue">
+        <label class="custom-control-label" for="mue">Mue</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" id="autre" formControlName="action" class="custom-control-input" value="autre">
+        <label class="custom-control-label" for="autre">Autre</label>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="date">Date :</label>
+        <input id="date" class="form-control" placeholder="aaaa-mm-jj" formControlName="date">
+      </div>
+
+      <div class="form-group">
+        <label for="note">Observation :</label>
+        <textarea id="note" class="form-control" formControlName="note"></textarea>
+      </div>
+
+      <button class="btn btn-success" [disabled]="suiviForm.invalid"
+              type="submit" style="margin-right: 5px;">Enregistrer
+      </button>
+      <button class="btn btn-primary" (click)="onBackFiche()" type="submit">Annuler</button>
+
+    </form>
+  </div>
+</div>

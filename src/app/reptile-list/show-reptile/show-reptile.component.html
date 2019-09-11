@@ -1,4 +1,4 @@
-<div class="row justify-content-md-center" *ngIf="reptile.name">
+<div class="row justify-content-md-center" *ngIf="reptile">
   <div class="col-md-8">
     <div class="card" style="margin-top: 15px;">
       <div class="card-header text-center" style="font-size: 24px;">
@@ -10,11 +10,11 @@
         <p class="card-text">
           <strong>Sexe :</strong> {{ reptile.gender }}
           <br>
-          <strong>Date de naissance :</strong> {{ reptile.birthday }}
+          <strong>Date de naissance :</strong> {{ reptile.birthday | date : "dd/MM/yyyy" }}
           <br>
           <strong>Provenance :</strong> {{ reptile.origin }}
           <br>
-          <strong>Date d'entrée :</strong> {{ reptile.date_start }}
+          <strong>Date d'entrée :</strong> {{ reptile.date_start | date : "dd/MM/yyyy" }}
           <br>
           <strong>Justificatif d'entrée :</strong> {{ reptile.supporting_start }}
           <br>
@@ -28,7 +28,7 @@
             <br>
           </span>
           <span *ngIf="reptile.date_end">
-            <strong>Date de sortie :</strong> {{ reptile.date_end }}
+            <strong>Date de sortie :</strong> {{ reptile.date_end | date : "dd/MM/yyyy" }}
             <br>
           </span>
           <span *ngIf="reptile.death">
@@ -42,16 +42,47 @@
         </p>
       </div>
     </div>
-    <button  type="button" class="btn btn-warning" (click)="onEditReptile()" style="margin: 15px auto 0 auto;display: block;"
-    *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
-      Modifier les informations
+    <div class="text-center" style="margin-top: 10px;">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-warning" (click)="onEditReptile()"
+        *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
+          Modifier les informations
+        </button>
+        <button type="button" class="btn btn-danger" (click)="onEndReptile()"
+        *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
+          Déclarer sa sortie
+        </button>
+        <button class="btn btn-primary" (click)="onBack()">
+          Retour à la liste
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <h2 class="text-center" style="margin-top: 15px;">Les derniers suivis</h2>
+    <button type="button" class="btn btn-success" (click)="onNewSuivi()" style="margin: 10px auto ;display: block;"
+      *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
+      Nouveau suivi
     </button>
-    <button  type="button" class="btn btn-danger" (click)="onEndReptile()" style="margin: 15px auto 0 auto;display: block;"
-    *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
-      Déclarer sa sortie
-    </button>
-    <button class="btn btn-primary" (click)="onBack()" style="margin: 15px auto 0 auto;display: block;">
-      Retour à la liste
-    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">Type</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Commentaire</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="suivis">
+        <tr *ngFor="let suivi of suivis | keyvalue">
+          <td class="text-center">{{ suivi.value.action }}</td>
+          <td class="text-center">{{ suivi.value.date | date : "dd/MM/yyyy" }}</td>
+          <td class="text-center">{{ suivi.value.note }}</td>
+          <td class="text-center">
+            <button type="button" class="btn btn-danger" (click)="onDeleteSuivi(suivi.key)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Reptile } from '../../models/reptile.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Suivi } from 'src/app/models/suivi.model';
 import { ReptilesService } from '../../services/reptiles.service';
+import { SuivisService } from '../../services/suivis.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-show-reptile',
@@ -11,18 +14,29 @@ import { ReptilesService } from '../../services/reptiles.service';
 export class ShowReptileComponent implements OnInit {
 
   reptile: Reptile;
+  suivis: Suivi[];
+  idReptile = this.route.snapshot.params['id'];
 
   constructor(private route: ActivatedRoute, private reptilesService: ReptilesService,
-              private router: Router) {}
+              private suivisService: SuivisService, private router: Router) {}
 
   ngOnInit() {
     this.reptile = new Reptile('', '', '', '', '', '', '', '');
-    const id = this.route.snapshot.params['id'];
-    this.reptilesService.getShowReptile(+id).then(
+    const id = this.idReptile;
+    this.reptilesService.getShowReptile(id).then(
       (reptile: Reptile) => {
         this.reptile = reptile;
       }
     );
+    // Get last suivis
+    firebase.database().ref('/suivis/'+id).orderByChild('date').limitToLast(10)
+      .on('value', (data) => {
+        let suivisCheck = []
+        data.forEach(function(child) {
+          suivisCheck.push(child.val())
+        });
+        this.suivis = suivisCheck.reverse();
+      });
   }
 
   onBack() {
@@ -30,11 +44,21 @@ export class ShowReptileComponent implements OnInit {
   }
 
   onEditReptile() {
-    this.router.navigate(['/reptiles', 'edit', this.route.snapshot.params['id']]);
+    this.router.navigate(['/reptiles', 'edit', this.idReptile]);
   }
 
   onEndReptile() {
-    this.router.navigate(['/reptiles', 'end', this.route.snapshot.params['id']]);
+    this.router.navigate(['/reptiles', 'end', this.idReptile]);
+  }
+
+  onNewSuivi() {
+    this.router.navigate(['/reptiles', this.idReptile, 'suivis', 'new']);
+  }
+
+  onDeleteSuivi(id) {
+    if (confirm("êtes vous sûr de vouloir supprimer ce suivi ?")) {
+      this.suivisService.removeSuivi(this.idReptile, id)
+    }
   }
 
 }
