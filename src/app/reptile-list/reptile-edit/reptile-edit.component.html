@@ -9,11 +9,17 @@
       </div>
 
       <div class="form-group">
+        <label for="vernacular">Nom vernaculaire :</label>
+        <input type="text" id="vernacular" class="form-control" formControlName="vernacular"
+        [value]="reptile.vernacular">
+      </div>
+
+      <div class="form-group">
         <label for="species">Espèce :</label>
         <input type="text" id="species" class="form-control" formControlName="species" [value]="reptile.species">
       </div>
 
-      <label>Sex :</label>
+      <label>Sexe :</label>
       <div class="custom-control custom-radio">
         <input type="radio" id="male" formControlName="gender" class="custom-control-input" value="mâle"
         [checked]="reptile.gender == 'mâle'">
@@ -28,12 +34,29 @@
 
       <div class="form-group">
         <label for="birthday">Date de naissance :</label>
-        <input id="birthday" class="form-control" placeholder="dd/mm/yyyy" formControlName="birthday"
+        <input id="birthday" class="form-control" placeholder="jj/mm/aaaa" formControlName="birthday"
           [value]="reptile.birthday">
       </div>
 
       <div class="form-group">
-        <label for="note">Note :</label>
+        <label for="origin">Provenance :</label>
+        <input type="text" id="origin" class="form-control" formControlName="origin" [value]="reptile.origin">
+      </div>
+
+      <div class="form-group">
+        <label for="date_start">Date d'entrée :</label>
+        <input id="date_start" class="form-control" placeholder="jj/mm/aaaa" formControlName="date_start"
+        [value]="reptile.date_start">
+      </div>
+
+      <div class="form-group">
+        <label for="supporting_start">Justificatif d'entrée :</label>
+        <input type="text" id="supporting_start" class="form-control" formControlName="supporting_start"
+        [value]="reptile.supporting_start">
+      </div>
+
+      <div class="form-group">
+        <label for="note">Observation (facultatif) :</label>
         <textarea id="note" class="form-control" formControlName="note" [value]="reptile.note"></textarea>
       </div>
 
@@ -41,7 +64,7 @@
         <div class="custom-file">
           <input type="file" class="custom-file-input" id="photo" (change)="detectFiles($event)"
             accept="image/*">
-          <label class="custom-file-label" for="photo">Changer la photo</label>
+          <label class="custom-file-label" for="photo">Changer la photo (facultatif)</label>
         </div>
       </div>
       <p *ngIf="fileUploaded">

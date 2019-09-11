@@ -27,20 +27,28 @@ export class ReptileFormComponent implements OnInit {
   initForm() {
     this.reptileForm = this.formBuilder.group({
       name: ['', Validators.required],
-      birthday: ['', Validators.required],
+      vernacular: ['', Validators.required],
       species: ['', Validators.required],
+      birthday: ['', Validators.required],
       gender: ['', Validators.required],
+      origin: ['', Validators.required],
+      date_start: ['', Validators.required],
+      supporting_start: ['', Validators.required],
       note: ''
     });
   }
 
   onSaveReptile() {
     const name = this.reptileForm.get('name').value;
-    const birthday = this.reptileForm.get('birthday').value;
+    const vernacular = this.reptileForm.get('vernacular').value;
     const species = this.reptileForm.get('species').value;
+    const birthday = this.reptileForm.get('birthday').value;
     const gender = this.reptileForm.get('gender').value;
+    const origin = this.reptileForm.get('origin').value;
+    const date_start = this.reptileForm.get('date_start').value;
+    const supporting_start = this.reptileForm.get('supporting_start').value;
     const note = this.reptileForm.get('note').value;
-    const newReptile = new Reptile(name, birthday, species, gender);
+    const newReptile = new Reptile(name, vernacular, species, birthday, gender, origin, date_start, supporting_start);
     if (this.fileUrl && this.fileUrl !== "") {
       newReptile.photo = this.fileUrl;
     }

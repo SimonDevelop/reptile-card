@@ -32,9 +32,13 @@ export class ReptileEditComponent implements OnInit {
         this.reptile = reptile;
         this.reptileEdit = this.formBuilder.group({
           name: [this.reptile.name, Validators.required],
-          birthday: [this.reptile.birthday, Validators.required],
+          vernacular: [this.reptile.vernacular, Validators.required],
           species: [this.reptile.species, Validators.required],
+          birthday: [this.reptile.birthday, Validators.required],
           gender: [this.reptile.gender, Validators.required],
+          origin: [this.reptile.origin, Validators.required],
+          date_start: [this.reptile.date_start, Validators.required],
+          supporting_start: [this.reptile.supporting_start, Validators.required],
           note: this.reptile.note
         });
       }
@@ -43,11 +47,15 @@ export class ReptileEditComponent implements OnInit {
 
   onSaveReptile() {
     const name = this.reptileEdit.get('name').value;
-    const birthday = this.reptileEdit.get('birthday').value;
+    const vernacular = this.reptileEdit.get('vernacular').value;
     const species = this.reptileEdit.get('species').value;
+    const birthday = this.reptileEdit.get('birthday').value;
     const gender = this.reptileEdit.get('gender').value;
+    const origin = this.reptileEdit.get('origin').value;
+    const date_start = this.reptileEdit.get('date_start').value;
+    const supporting_start = this.reptileEdit.get('supporting_start').value;
     const note = this.reptileEdit.get('note').value;
-    const newReptile = new Reptile(name, birthday, species, gender);
+    const newReptile = new Reptile(name, vernacular, species, birthday, gender, origin, date_start, supporting_start);
     newReptile.note = note;
     if (this.fileUrl && this.fileUrl !== "") {
       if (this.reptile.photo !== "") {

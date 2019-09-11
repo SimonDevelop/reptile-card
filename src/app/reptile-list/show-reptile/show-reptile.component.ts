@@ -16,7 +16,7 @@ export class ShowReptileComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
-    this.reptile = new Reptile('', '', '', '');
+    this.reptile = new Reptile('', '', '', '', '', '', '', '');
     const id = this.route.snapshot.params['id'];
     this.reptilesService.getShowReptile(+id).then(
       (reptile: Reptile) => {
