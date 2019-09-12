@@ -1,13 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reptile } from '../../models/reptile.model';
 import { ReptilesService } from '../../services/reptiles.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+const I18N_VALUES = {
+  'fr': {
+    weekdays: ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'],
+    months: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
+  }
+  // other languages you would support
+};
+
+@Injectable()
+export class I18n {
+  language = 'fr';
+}
+
+// Define custom service providing the months and weekdays translations
+@Injectable()
+export class CustomDatepickerI18n extends NgbDatepickerI18n {
+
+  constructor(private _i18n: I18n) {
+    super();
+  }
+
+  getWeekdayShortName(weekday: number): string {
+    return I18N_VALUES[this._i18n.language].weekdays[weekday - 1];
+  }
+  getMonthShortName(month: number): string {
+    return I18N_VALUES[this._i18n.language].months[month - 1];
+  }
+  getMonthFullName(month: number): string {
+    return this.getMonthShortName(month);
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.year}-${date.month}-${date.day}`;
+  }
+}
 
 @Component({
   selector: 'app-reptile-end',
   templateUrl: './reptile-end.component.html',
-  styleUrls: ['./reptile-end.component.scss']
+  styleUrls: ['./reptile-end.component.scss'],
+  providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class ReptileEndComponent implements OnInit {
 
@@ -49,7 +87,8 @@ export class ReptileEndComponent implements OnInit {
     const photo = this.reptile.photo;
 
     const destination = this.reptileEnd.get('destination').value;
-    const date_end = this.reptileEnd.get('date_end').value;
+    let datePickerD = this.reptileEnd.get('date_end').value;
+    const date_end = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
     const death = this.reptileEnd.get('death').value;
     const supporting_end = this.reptileEnd.get('supporting_end').value;
 

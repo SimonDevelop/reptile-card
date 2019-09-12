@@ -18,10 +18,17 @@
       </div>
       <br>
 
-      <div class="form-group">
-        <label for="date">Date :</label>
-        <input id="date" class="form-control" placeholder="aaaa-mm-jj" formControlName="date">
+      <label for="date">Date :</label>
+      <div class="input-group">
+        <input id="date" class="form-control" placeholder="aaaa-mm-jj" formControlName="date"
+        ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <i class="far fa-calendar-alt"></i>
+          </button>
+        </div>
       </div>
+      <br>
 
       <div class="form-group">
         <label for="note">Observation :</label>
@@ -31,8 +38,8 @@
       <button class="btn btn-success" [disabled]="suiviForm.invalid"
               type="submit" style="margin-right: 5px;">Enregistrer
       </button>
-      <button class="btn btn-primary" (click)="onBackFiche()" type="submit">Annuler</button>
-
     </form>
+    <br>
+    <button class="btn btn-primary" (click)="onBackFiche()">Annuler</button>
   </div>
 </div>
