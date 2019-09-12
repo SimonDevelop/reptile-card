@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -17,6 +18,8 @@ import { ReptileEndComponent } from './reptile-list/reptile-end/reptile-end.comp
 import { ReptilesService } from './services/reptiles.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { SuiviListComponent } from './suivi-list/suivi-list.component';
+import { SuiviFormComponent } from './suivi-list/suivi-form/suivi-form.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signin', component: SigninComponent },
@@ -25,6 +28,8 @@ const appRoutes: Routes = [
   { path: 'reptiles/edit/:id', canActivate: [AuthGuardService], component: ReptileEditComponent },
   { path: 'reptiles/end/:id', canActivate: [AuthGuardService], component: ReptileEndComponent },
   { path: 'reptiles/view/:id', canActivate: [AuthGuardService], component: ShowReptileComponent },
+  { path: 'reptiles/:id/suivis/new', canActivate: [AuthGuardService], component: SuiviFormComponent },
+  { path: 'reptiles/:id/suivis', canActivate: [AuthGuardService], component: SuiviListComponent },
   { path: '', redirectTo: 'reptiles', pathMatch: 'full' },
   { path: '**', redirectTo: 'reptiles' }
 ]
@@ -38,14 +43,17 @@ const appRoutes: Routes = [
     ShowReptileComponent,
     ReptileFormComponent,
     ReptileEditComponent,
-    ReptileEndComponent
+    ReptileEndComponent,
+    SuiviListComponent,
+    SuiviFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgbModule
   ],
   providers: [
     AuthService,

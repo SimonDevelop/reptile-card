@@ -1,13 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reptile } from '../../models/reptile.model';
 import { ReptilesService } from '../../services/reptiles.service';
 import { Router } from '@angular/router';
+import {NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+const I18N_VALUES = {
+  'fr': {
+    weekdays: ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'],
+    months: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Déc'],
+  }
+  // other languages you would support
+};
+
+@Injectable()
+export class I18n {
+  language = 'fr';
+}
+
+// Define custom service providing the months and weekdays translations
+@Injectable()
+export class CustomDatepickerI18n extends NgbDatepickerI18n {
+
+  constructor(private _i18n: I18n) {
+    super();
+  }
+
+  getWeekdayShortName(weekday: number): string {
+    return I18N_VALUES[this._i18n.language].weekdays[weekday - 1];
+  }
+  getMonthShortName(month: number): string {
+    return I18N_VALUES[this._i18n.language].months[month - 1];
+  }
+  getMonthFullName(month: number): string {
+    return this.getMonthShortName(month);
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.year}-${date.month}-${date.day}`;
+  }
+}
 
 @Component({
   selector: 'app-reptile-form',
   templateUrl: './reptile-form.component.html',
-  styleUrls: ['./reptile-form.component.scss']
+  styleUrls: ['./reptile-form.component.scss'],
+  providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 
 export class ReptileFormComponent implements OnInit {
@@ -42,10 +80,12 @@ export class ReptileFormComponent implements OnInit {
     const name = this.reptileForm.get('name').value;
     const vernacular = this.reptileForm.get('vernacular').value;
     const species = this.reptileForm.get('species').value;
-    const birthday = this.reptileForm.get('birthday').value;
+    let datePickerB = this.reptileForm.get('birthday').value;
+    const birthday = datePickerB.year+"-"+datePickerB.month+"-"+datePickerB.day;
     const gender = this.reptileForm.get('gender').value;
     const origin = this.reptileForm.get('origin').value;
-    const date_start = this.reptileForm.get('date_start').value;
+    let datePickerD = this.reptileForm.get('date_start').value;
+    const date_start = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
     const supporting_start = this.reptileForm.get('supporting_start').value;
     const note = this.reptileForm.get('note').value;
     const newReptile = new Reptile(name, vernacular, species, birthday, gender, origin, date_start, supporting_start);
@@ -70,6 +110,10 @@ export class ReptileFormComponent implements OnInit {
 
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);
+  }
+
+  onBackList() {
+    this.router.navigate(['/reptiles']);
   }
 
 }

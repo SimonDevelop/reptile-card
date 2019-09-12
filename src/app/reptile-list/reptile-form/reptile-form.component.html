@@ -29,20 +29,34 @@
       </div>
       <br>
 
-      <div class="form-group">
-        <label for="birthday">Date de naissance :</label>
-        <input id="birthday" class="form-control" placeholder="jj/mm/aaaa" formControlName="birthday">
+      <label for="birthday">Date de naissance :</label>
+      <div class="input-group">
+        <input id="birthday" class="form-control" placeholder="aaaa-mm-jj" formControlName="birthday"
+        ngbDatepicker #b="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="b.toggle()" type="button">
+            <i class="far fa-calendar-alt"></i>
+          </button>
+        </div>
       </div>
+      <br>
 
       <div class="form-group">
         <label for="origin">Provenance :</label>
         <input type="text" id="origin" class="form-control" formControlName="origin">
       </div>
 
-      <div class="form-group">
-        <label for="date_start">Date d'entrée :</label>
-        <input id="date_start" class="form-control" placeholder="jj/mm/aaaa" formControlName="date_start">
+      <label for="date_start">Date d'entrée :</label>
+      <div class="input-group">
+        <input id="date_start" class="form-control" placeholder="aaaa-mm-jj" formControlName="date_start"
+        ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <i class="far fa-calendar-alt"></i>
+          </button>
+        </div>
       </div>
+      <br>
 
       <div class="form-group">
         <label for="supporting_start">Justificatif d'entrée :</label>
@@ -74,5 +88,7 @@
       </button>
 
     </form>
+    <br>
+    <button class="btn btn-primary" (click)="onBackList()">Annuler</button>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="reptile.name">
+<div class="row" *ngIf="reptile">
   <div class="col-sm-8 col-sm-offset-2">
     <h2>Edition de la fiche "{{ reptile.name }}"</h2>
     <form *ngIf="reptileEdit" [formGroup]="reptileEdit" (ngSubmit)="onSaveReptile()">
@@ -32,22 +32,34 @@
       </div>
       <br>
 
-      <div class="form-group">
-        <label for="birthday">Date de naissance :</label>
-        <input id="birthday" class="form-control" placeholder="jj/mm/aaaa" formControlName="birthday"
-          [value]="reptile.birthday">
+      <label for="birthday">Date de naissance :</label>
+      <div class="input-group">
+        <input id="birthday" class="form-control" placeholder="aaaa-mm-jj" formControlName="birthday"
+        ngbDatepicker #b="ngbDatepicker" [value]="reptile.birthday">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="b.toggle()" type="button">
+            <i class="far fa-calendar-alt"></i>
+          </button>
+        </div>
       </div>
+      <br>
 
       <div class="form-group">
         <label for="origin">Provenance :</label>
         <input type="text" id="origin" class="form-control" formControlName="origin" [value]="reptile.origin">
       </div>
 
-      <div class="form-group">
-        <label for="date_start">Date d'entrée :</label>
-        <input id="date_start" class="form-control" placeholder="jj/mm/aaaa" formControlName="date_start"
-        [value]="reptile.date_start">
+      <label for="date_start">Date d'entrée :</label>
+      <div class="input-group">
+        <input id="date_start" class="form-control" placeholder="aaaa-mm-jj" formControlName="date_start"
+        ngbDatepicker #d="ngbDatepicker" [value]="reptile.date_start">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <i class="far fa-calendar-alt"></i>
+          </button>
+        </div>
       </div>
+      <br>
 
       <div class="form-group">
         <label for="supporting_start">Justificatif d'entrée :</label>
@@ -77,8 +89,9 @@
       <button class="btn btn-success" [disabled]="reptileEdit.invalid || fileIsUploading"
               type="submit" style="margin-right: 5px;">Enregistrer
       </button>
-      <button class="btn btn-primary" (click)="onBackFiche()" type="submit">Annuler</button>
 
     </form>
+    <br>
+    <button class="btn btn-primary" (click)="onBackFiche()">Annuler</button>
   </div>
 </div>
