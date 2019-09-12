@@ -55,6 +55,11 @@ export class SuivisService {
     this.emitSuivis();
   }
 
+  removeSuivis(idReptile: number) {
+    firebase.database().ref('/suivis/' + idReptile ).remove();
+    this.emitSuivis();
+  }
+
   constructor(private route: ActivatedRoute) {
     this.getSuivis(this.route.snapshot.params['id']);
   }

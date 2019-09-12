@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReptilesService } from '../services/reptiles.service';
+import { SuivisService } from '../services/suivis.service';
 import { Reptile } from '../models/reptile.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -14,7 +15,8 @@ export class ReptileListComponent implements OnInit {
   reptiles: Reptile[];
   reptilesSubscription: Subscription;
 
-  constructor(private reptilesService: ReptilesService, private router: Router) {}
+  constructor(private reptilesService: ReptilesService, private suivisService: SuivisService,
+              private router: Router) {}
 
   ngOnInit() {
     this.reptilesSubscription = this.reptilesService.reptilesSubject.subscribe(
@@ -29,8 +31,9 @@ export class ReptileListComponent implements OnInit {
     this.router.navigate(['/reptiles', 'new']);
   }
 
-  onDeleteReptile(reptile: Reptile) {
+  onDeleteReptile(reptile: Reptile, idReptile: number) {
     this.reptilesService.removeReptile(reptile);
+    this.suivisService.removeSuivis(idReptile);
   }
 
   onViewReptile(id: number) {
