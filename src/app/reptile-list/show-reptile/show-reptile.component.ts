@@ -15,6 +15,7 @@ export class ShowReptileComponent implements OnInit {
 
   reptile: Reptile;
   suivis: Suivi[];
+  idSuivis: any;
   idReptile = this.route.snapshot.params['id'];
 
   constructor(private route: ActivatedRoute, private reptilesService: ReptilesService,
@@ -32,9 +33,12 @@ export class ShowReptileComponent implements OnInit {
     firebase.database().ref('/suivis/'+id).orderByChild('date').limitToLast(10)
       .on('value', (data) => {
         let suivisCheck = []
+        let suivisCheckId = []
         data.forEach(function(child) {
+          suivisCheckId.push(child.key)
           suivisCheck.push(child.val())
         });
+        this.idSuivis = suivisCheckId.reverse();
         this.suivis = suivisCheck.reverse();
       });
   }
