@@ -78,7 +78,13 @@ export class SuiviFormComponent implements OnInit {
   onSaveSuivi() {
     const action = this.suiviForm.get('action').value;
     let datePicker = this.suiviForm.get('date').value;
-    const date = datePicker.year+"-"+datePicker.month+"-"+datePicker.day;
+    let date_let;
+    if (datePicker.year && datePicker.month && datePicker.day) {
+        date_let = datePicker.year+"-"+datePicker.month+"-"+datePicker.day;
+    } else {
+        date_let = datePicker;
+    }
+    const date = date_let;
     const note = this.suiviForm.get('note').value;
     const newSuivi = new Suivi(action, date, note);
     this.suivisService.createNewSuivi(this.idReptile, newSuivi);

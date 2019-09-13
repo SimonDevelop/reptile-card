@@ -88,7 +88,13 @@ export class ReptileEndComponent implements OnInit {
 
     const destination = this.reptileEnd.get('destination').value;
     let datePickerD = this.reptileEnd.get('date_end').value;
-    const date_end = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
+    let date_end_let;
+    if (datePickerD.year && datePickerD.month && datePickerD.day) {
+        date_end_let = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
+    } else {
+        date_end_let = datePickerD;
+    }
+    const date_end = date_end_let;
     const death = this.reptileEnd.get('death').value;
     const supporting_end = this.reptileEnd.get('supporting_end').value;
 

@@ -89,11 +89,23 @@ export class ReptileEditComponent implements OnInit {
     const vernacular = this.reptileEdit.get('vernacular').value;
     const species = this.reptileEdit.get('species').value;
     let datePickerB = this.reptileEdit.get('birthday').value;
-    const birthday = datePickerB.year+"-"+datePickerB.month+"-"+datePickerB.day;
+    let birthday_let;
+    if (datePickerB.year && datePickerB.month && datePickerB.day) {
+        birthday_let = datePickerB.year+"-"+datePickerB.month+"-"+datePickerB.day;
+    } else {
+        birthday_let = datePickerB;
+    }
+    const birthday = birthday_let;
     const gender = this.reptileEdit.get('gender').value;
     const origin = this.reptileEdit.get('origin').value;
     let datePickerD = this.reptileEdit.get('date_start').value;
-    const date_start = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
+    let date_start_let;
+    if (datePickerD.year && datePickerD.month && datePickerD.day) {
+        date_start_let = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
+    } else {
+        date_start_let = datePickerD;
+    }
+    const date_start = date_start_let;
     const supporting_start = this.reptileEdit.get('supporting_start').value;
     const note = this.reptileEdit.get('note').value;
     const newReptile = new Reptile(name, vernacular, species, birthday, gender, origin, date_start, supporting_start);
