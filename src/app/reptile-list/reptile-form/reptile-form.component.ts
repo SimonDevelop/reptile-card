@@ -81,11 +81,23 @@ export class ReptileFormComponent implements OnInit {
     const vernacular = this.reptileForm.get('vernacular').value;
     const species = this.reptileForm.get('species').value;
     let datePickerB = this.reptileForm.get('birthday').value;
-    const birthday = datePickerB.year+"-"+datePickerB.month+"-"+datePickerB.day;
+    let birthday_let;
+    if (datePickerB.year && datePickerB.month && datePickerB.day) {
+        birthday_let = datePickerB.year+"-"+datePickerB.month+"-"+datePickerB.day;
+    } else {
+        birthday_let = datePickerB;
+    }
+    const birthday = birthday_let;
     const gender = this.reptileForm.get('gender').value;
     const origin = this.reptileForm.get('origin').value;
     let datePickerD = this.reptileForm.get('date_start').value;
-    const date_start = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
+    let date_start_let;
+    if (datePickerD.year && datePickerD.month && datePickerD.day) {
+        date_start_let = datePickerD.year+"-"+datePickerD.month+"-"+datePickerD.day;
+    } else {
+        date_start_let = datePickerD;
+    }
+    const date_start = date_start_let;
     const supporting_start = this.reptileForm.get('supporting_start').value;
     const note = this.reptileForm.get('note').value;
     const newReptile = new Reptile(name, vernacular, species, birthday, gender, origin, date_start, supporting_start);
