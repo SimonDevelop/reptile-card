@@ -13,6 +13,7 @@ import * as firebase from 'firebase';
 })
 export class ShowReptileComponent implements OnInit {
 
+  todayYear = new Date().getFullYear();
   reptile: Reptile;
   suivis: Suivi[];
   idSuivis: any;
@@ -63,6 +64,10 @@ export class ShowReptileComponent implements OnInit {
     if (confirm("êtes vous sûr de vouloir supprimer ce suivi ?")) {
       this.suivisService.removeSuivi(this.idReptile, id)
     }
+  }
+
+  onShowSuivisByYear(year) {
+    this.router.navigate(['/reptiles', this.idReptile, 'suivis', year]);
   }
 
 }

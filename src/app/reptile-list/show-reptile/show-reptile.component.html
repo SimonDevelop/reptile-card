@@ -60,9 +60,9 @@
   </div>
   <div class="col-md-12">
     <h2 class="text-center" style="margin-top: 15px;">Les derniers suivis</h2>
-    <button type="button" class="btn btn-success" (click)="onNewSuivi()" style="margin: 10px auto ;display: block;"
-      *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
-      Nouveau suivi
+    <button type="button" class="btn btn-success" (click)="onShowSuivisByYear(todayYear)"
+    style="margin: 10px auto ;display: block;">
+      Afficher les suivis
     </button>
     <table class="table">
       <thead>

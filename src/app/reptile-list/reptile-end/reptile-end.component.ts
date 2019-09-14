@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reptile } from '../../models/reptile.model';
 import { ReptilesService } from '../../services/reptiles.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
   'fr': {
@@ -22,8 +22,13 @@ export class I18n {
 @Injectable()
 export class CustomDatepickerI18n extends NgbDatepickerI18n {
 
-  constructor(private _i18n: I18n) {
+  constructor(private _i18n: I18n, config: NgbDatepickerConfig) {
     super();
+    config.maxDate = {
+        year: (new Date().getFullYear()),
+        month: (new Date().getMonth()+1),
+        day: (new Date().getDate())
+    };
   }
 
   getWeekdayShortName(weekday: number): string {

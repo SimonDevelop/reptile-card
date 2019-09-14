@@ -29,7 +29,7 @@ const appRoutes: Routes = [
   { path: 'reptiles/end/:id', canActivate: [AuthGuardService], component: ReptileEndComponent },
   { path: 'reptiles/view/:id', canActivate: [AuthGuardService], component: ShowReptileComponent },
   { path: 'reptiles/:id/suivis/new', canActivate: [AuthGuardService], component: SuiviFormComponent },
-  { path: 'reptiles/:id/suivis', canActivate: [AuthGuardService], component: SuiviListComponent },
+  { path: 'reptiles/:id/suivis/:year', canActivate: [AuthGuardService], component: SuiviListComponent },
   { path: '', redirectTo: 'reptiles', pathMatch: 'full' },
   { path: '**', redirectTo: 'reptiles' }
 ]
