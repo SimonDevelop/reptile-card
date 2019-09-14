@@ -54,6 +54,7 @@ export class SuiviFormComponent implements OnInit {
   reptile: Reptile;
   idReptile = this.route.snapshot.params['id'];
   suiviForm: FormGroup;
+  todayYear = new Date().getFullYear()
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
     private reptilesService: ReptilesService, private suivisService: SuivisService, private router: Router) {}
@@ -88,7 +89,7 @@ export class SuiviFormComponent implements OnInit {
     const note = this.suiviForm.get('note').value;
     const newSuivi = new Suivi(action, date, note);
     this.suivisService.createNewSuivi(this.idReptile, newSuivi);
-    this.router.navigate(['/reptiles', 'view', this.idReptile]);
+    this.router.navigate(['/reptiles', this.idReptile, 'suivis', this.todayYear]);
   }
 
   onBackFiche() {
