@@ -96,4 +96,8 @@ export class SuiviListComponent implements OnInit {
     this.router.navigate(['/reptiles', this.idReptile, 'suivis', y]);
   }
 
+  onExportXLSX(y) {
+    this.suivisService.exportAsExcelFile(this.suivis, 'suivis_'+y);
+  }
+
 }

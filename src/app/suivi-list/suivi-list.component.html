@@ -15,13 +15,20 @@
       <br>
     </div>
     <div class="row justify-content-md-center">
-      <div class="col-md-4">
-        <select class="form-control" *ngIf="year && firstYearOfSuivis" (change)="onChangeSuiviByYear($event.target.value)">
-          <option *ngFor='let in of counter(todayYear-firstYearOfSuivis+1) ;let i = index' value="{{ todayYear-i }}"
-          [selected]="todayYear-i == year">
-          année {{ todayYear-i }}
-        </option>
-      </select>
+      <div class="col-md-5">
+        <div class="input-group">
+          <select class="form-control" *ngIf="year && firstYearOfSuivis" (change)="onChangeSuiviByYear($event.target.value)">
+            <option *ngFor='let in of counter(todayYear-firstYearOfSuivis+1) ;let i = index' value="{{ todayYear-i }}"
+              [selected]="todayYear-i == year">
+              année {{ todayYear-i }}
+            </option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-success" (click)="onExportXLSX(year)">
+              <i class="far fa-file-excel"></i> Exporter le suivi
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <br>
