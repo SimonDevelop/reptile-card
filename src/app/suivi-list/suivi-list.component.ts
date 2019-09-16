@@ -40,17 +40,25 @@ export class SuiviListComponent implements OnInit {
           suivisCheckId.push(child.key)
           suivisCheck.push(child.val())
         });
-        this.idSuivis = suivisCheckId.reverse();
-        this.suivis = suivisCheck.reverse();
+        if (suivisCheck.length > 0 && suivisCheckId.length > 0) {
+          this.idSuivis = suivisCheckId.reverse();
+          this.suivis = suivisCheck.reverse();
+        } else {
+          this.router.navigate(['/reptiles', 'view', this.idReptile]);
+        }
       });
     // Get first suivi
     firebase.database().ref('/suivis/'+this.idReptile).orderByChild('date').limitToFirst(1)
       .on('value', (data) => {
-        let firstYear;
+        let firstYear = null;
         data.forEach(function(child) {
           firstYear = child.val().date
         });
-        this.firstYearOfSuivis = firstYear.substr(0, 4);
+        if (firstYear === null) {
+          this.router.navigate(['/reptiles', 'view', this.idReptile]);
+        } else {
+          this.firstYearOfSuivis = firstYear.substr(0, 4);
+        }
       });
   }
 
