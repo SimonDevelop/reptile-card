@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SuiviListComponent } from './suivi-list/suivi-list.component';
 import { SuiviFormComponent } from './suivi-list/suivi-form/suivi-form.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signin', component: SigninComponent },
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     ReptileEditComponent,
     ReptileEndComponent,
     SuiviListComponent,
-    SuiviFormComponent
+    SuiviFormComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

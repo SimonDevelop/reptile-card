@@ -14,10 +14,11 @@ import * as firebase from 'firebase';
 export class ShowReptileComponent implements OnInit {
 
   todayYear = new Date().getFullYear();
-  reptile: Reptile;
+  reptile: Reptile = null;
   suivis: Suivi[];
   idSuivis: any;
   idReptile = this.route.snapshot.params['id'];
+  showLoadingSuivis: boolean = true;
 
   constructor(private route: ActivatedRoute, private reptilesService: ReptilesService,
               private suivisService: SuivisService, private router: Router) {}
@@ -41,6 +42,7 @@ export class ShowReptileComponent implements OnInit {
         });
         this.idSuivis = suivisCheckId.reverse();
         this.suivis = suivisCheck.reverse();
+        this.showLoadingSuivis = false;
       });
   }
 
