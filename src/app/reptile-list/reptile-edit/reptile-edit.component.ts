@@ -26,6 +26,11 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 
   constructor(private _i18n: I18n, config: NgbDatepickerConfig) {
     super();
+    config.minDate = {
+      year: (new Date().getFullYear())-50,
+      month: 1,
+      day: 1
+    };
     config.maxDate = {
         year: (new Date().getFullYear()),
         month: (new Date().getMonth()+1),
