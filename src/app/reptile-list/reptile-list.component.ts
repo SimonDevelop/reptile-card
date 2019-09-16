@@ -14,6 +14,7 @@ export class ReptileListComponent implements OnInit {
 
   reptiles: Reptile[];
   reptilesSubscription: Subscription;
+  showLoading: boolean = true;
 
   constructor(private reptilesService: ReptilesService, private suivisService: SuivisService,
               private router: Router) {}

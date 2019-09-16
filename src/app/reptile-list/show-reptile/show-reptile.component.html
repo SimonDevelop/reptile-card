@@ -1,4 +1,5 @@
-<div class="row justify-content-md-center" *ngIf="reptile">
+<loading-spinner *ngIf="!reptile.name"></loading-spinner>
+<div class="row justify-content-md-center" *ngIf="reptile.name">
   <div class="col-md-8">
     <div class="card" style="margin-top: 15px;">
       <div class="card-header text-center" style="font-size: 24px;">
@@ -84,5 +85,6 @@
         </tr>
       </tbody>
     </table>
+    <loading-spinner *ngIf="showLoadingSuivis"></loading-spinner>
   </div>
 </div>
