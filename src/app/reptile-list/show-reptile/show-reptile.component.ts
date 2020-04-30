@@ -28,7 +28,11 @@ export class ShowReptileComponent implements OnInit {
     const id = this.idReptile;
     this.reptilesService.getShowReptile(id).then(
       (reptile: Reptile) => {
-        this.reptile = reptile;
+        if (reptile == null) {
+          this.router.navigate(['/reptiles']);
+        } else {
+          this.reptile = reptile;
+        }
       }
     );
     // Get last suivis
