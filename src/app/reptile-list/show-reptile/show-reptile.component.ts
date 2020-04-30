@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 })
 export class ShowReptileComponent implements OnInit {
 
-  todayYear = new Date().getFullYear();
+  year = null;
   reptile: Reptile = null;
   suivis: Suivi[];
   idSuivis: any;
@@ -40,13 +40,16 @@ export class ShowReptileComponent implements OnInit {
       .on('value', (data) => {
         let suivisCheck = []
         let suivisCheckId = []
+        let yearCheck = null
         data.forEach(function(child) {
           suivisCheckId.push(child.key)
           suivisCheck.push(child.val())
+          yearCheck = child.val().date.substr(0, 4);
         });
         this.idSuivis = suivisCheckId.reverse();
         this.suivis = suivisCheck.reverse();
         this.showLoadingSuivis = false;
+        this.year = yearCheck;
       });
   }
 
