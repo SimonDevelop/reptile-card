@@ -134,8 +134,8 @@ export class ReptileFormComponent implements OnInit {
     this.onUploadFile(event.target.files[0]);
   }
 
-  onBackList() {
-    this.router.navigate(['/reptiles']);
+  onGoBack() {
+    window.history.back();
   }
 
 }
