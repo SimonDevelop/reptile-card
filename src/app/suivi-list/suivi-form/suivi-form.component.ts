@@ -105,4 +105,8 @@ export class SuiviFormComponent implements OnInit {
     this.router.navigate(['/reptiles', 'view', this.idReptile]);
   }
 
+  onGoBack() {
+    window.history.back();
+  }
+
 }
