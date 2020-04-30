@@ -1,9 +1,14 @@
 <div class="row">
   <div class="col-md-12">
     <h1 class="text-center">Reptiles</h1>
-    <loading-spinner *ngIf="showLoading && reptiles.length < 1"></loading-spinner>
-    <p class="text-center" *ngIf="reptiles.length < 1 && !showLoading">Aucun reptile en base</p>
+    <loading-spinner *ngIf="showLoading && (reptiles.length < 1 || reptiles == null)"></loading-spinner>
+    <p class="text-center" *ngIf="reptiles == null">Aucun reptile trouvé</p>
     <div class="row justify-content-md-center">
+
+      <button *ngIf="reptiles == null" (click)="onNewReptile()"
+      class="btn btn-success" style="margin: 10px auto ;display: block;">
+        Ajouter mon premier reptile
+      </button>
 
       <div class="col-md-4" *ngFor="let reptile of reptiles; let i = index">
         <div class="card" style="width: 100%;">
