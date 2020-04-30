@@ -49,6 +49,10 @@
         *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
           Modifier les informations
         </button>
+        <button type="button" class="btn btn-success" (click)="onNewSuivi()"
+        *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
+          Nouveau suivi
+        </button>
         <button type="button" class="btn btn-danger" (click)="onEndReptile()"
         *ngIf="!reptile.destination && !reptile.date_end && !reptile.supporting_end">
           Déclarer sa sortie
@@ -60,12 +64,13 @@
     </div>
   </div>
   <div class="col-md-12">
-    <h2 class="text-center" style="margin-top: 15px;">Les derniers suivis</h2>
-    <button type="button" class="btn btn-success" (click)="onShowSuivisByYear(todayYear)"
-    style="margin: 10px auto ;display: block;">
+    <h2 class="text-center" style="margin-top: 15px;" *ngIf="year">Les derniers suivis</h2>
+    <h2 class="text-center" style="margin-top: 15px;" *ngIf="!year">Aucun suivi trouvé</h2>
+    <button type="button" class="btn btn-success" (click)="onShowSuivisByYear(year)"
+    style="margin: 10px auto ;display: block;" *ngIf="year">
       Afficher les suivis
     </button>
-    <div class="table-responsive">
+    <div class="table-responsive" *ngIf="year">
       <table class="table table-striped">
         <thead>
           <tr>
