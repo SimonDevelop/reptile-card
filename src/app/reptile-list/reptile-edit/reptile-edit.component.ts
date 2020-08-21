@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reptile } from '../../models/reptile.model';
 import { ReptilesService } from '../../services/reptiles.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbDatepickerConfig, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbDatepickerI18n, NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 import * as firebase from 'firebase';
 
@@ -67,18 +67,29 @@ export class ReptileEditComponent implements OnInit {
   fileIsUploading = false;
   fileUrl: string;
   fileUploaded = false;
+  birthday;
+  dateStart;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
-    private reptilesService: ReptilesService, private router: Router) {}
+    private reptilesService: ReptilesService, private router: Router, private calendar: NgbCalendar) {}
 
   ngOnInit() {
     this.initForm();
   }
 
+  toDate(dob) {
+    const [year, month, day] = dob.split('-');
+    return {"year": year, "month": month, "day": day};
+  }
+
   initForm() {
-    this.reptilesService.getShowReptile(+this.idReptile).then(
+    this.reptilesService.getShowReptile(this.idReptile).then(
       (reptile: Reptile) => {
         this.reptile = reptile;
+        let birthday = this.toDate(this.reptile.birthday)
+        let dateStart = this.toDate(this.reptile.date_start)
+        this.birthday = new NgbDate(parseInt(birthday.year), parseInt(birthday.month), parseInt(birthday.day))
+        this.dateStart = new NgbDate(parseInt(dateStart.year), parseInt(dateStart.month), parseInt(dateStart.day))
         this.reptileEdit = this.formBuilder.group({
           name: [this.reptile.name, Validators.required],
           vernacular: [this.reptile.vernacular, Validators.required],
