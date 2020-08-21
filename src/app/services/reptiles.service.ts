@@ -50,6 +50,9 @@ export class ReptilesService {
 
   editReptile(id: number, newReptile: Reptile) {
     this.reptiles[id] = newReptile;
+    if (this.reptiles[id].photo == undefined) {
+        this.reptiles[id].photo = "";
+    }
     this.saveReptiles();
     this.emitReptiles();
   }
